@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome Back - Aesha</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #181818; /* Dark background */
+            color: #f4f4f4; /* Light text */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #FFD700; /* Gold color for the title */
+            margin-top: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #bbb;
+            margin: 1rem 0;
+        }
+
+        /* Main container for the content */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Card design */
+        .card {
+            background-color: #333;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 280px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #00B8D9; /* Cyan for highlights */
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer p {
+            font-size: 1rem;
+        }
+
+        .footer a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                width: 100%;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .footer p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <h1>Welcome Back, Aesha!</h1>
+    <p>We’ve missed you. Let’s check your connection details below:</p>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <!-- Card 1: IP Address -->
+        <div class="card">
+            <h2>Your IP Address</h2>
+            <p>Your <span class="highlight">IP Address</span> is:</p>
+            <p id="ip-address">Loading...</p>
+        </div>
+
+        <!-- Card 2: Hostname -->
+        <div class="card">
+            <h2>Server Hostname</h2>
+            <p>Current <span class="highlight">Hostname</span> of the server:</p>
+            <p id="server-hostname">Loading...</p>
+        </div>
+
+        <!-- Card 3: Support Links -->
+        <div class="card">
+            <h2>Need Help?</h2>
+            <p>For documentation and support, visit <a href="http://nginx.org/">nginx.org</a>.</p>
+            <p>For commercial support, check <a href="http://nginx.com/">nginx.com</a>.</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Your Company | All Rights Reserved</p>
+        <p>Contact us: <a href="mailto:support@yourcompany.com">support@yourcompany.com</a></p>
+    </div>
+
+    <script>
+        // Fetch the client's IP address using ipify API
+        function fetchIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-address').textContent = data.ip;
+                })
+                .catch(error => {
+                    console.error('Error fetching IP:', error);
+                    document.getElementById('ip-address').textContent = 'Unable to fetch IP address';
+                });
+        }
+
+        // Function to get the server's hostname (static in this case, as HTML cannot fetch it directly)
+        function fetchHostname() {
+            document.getElementById('server-hostname').textContent = window.location.hostname;
+        }
+
+        // Run both functions when the page is loaded
+        window.onload = function() {
+            fetchIP();
+            fetchHostname();
+        };
+    </script>
+
+</body>
+</html>
